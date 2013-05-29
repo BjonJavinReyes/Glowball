@@ -84,9 +84,4 @@ public class BallController : MonoBehaviour
 		// Apply force to ball
 		gameObject.rigidbody.AddForce(force, ForceMode.Acceleration);
 	}
-	
-	void OnGUI()
-	{	
-		GUI.Label(new Rect(Screen.width/2,Screen.height/2,Screen.width,Screen.height), Screen.width + " x " + Screen.height);
-	}
 }

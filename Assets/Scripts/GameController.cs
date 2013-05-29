@@ -13,7 +13,10 @@ public class GameController : MonoBehaviour
 	{
 		// Find items in heirarchy
 		level_man = gameObject.GetComponent<LevelManager>();
-		glow_ball = GameObject.Find("glow_ball").GetComponent<BallController>();;
+		glow_ball = GameObject.Find("glow_ball").GetComponent<BallController>();
+		
+		// Tell screen to not dim
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 	}
 	
 	void Update()

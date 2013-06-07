@@ -46,10 +46,15 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BallController.cs" />
      <Compile Include="Assets\Scripts\BoundaryManager.cs" />
-     <Compile Include="Assets\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Scripts\FPS.cs" />
-     <Compile Include="Assets\Scripts\GameController.cs" />
-     <Compile Include="Assets\Scripts\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\DebugLog.cs" />
+     <Compile Include="Assets\Scripts\GameController\AudioManager.cs" />
+     <Compile Include="Assets\Scripts\GameController\CameraController.cs" />
+     <Compile Include="Assets\Scripts\GameController\GameController.cs" />
+     <Compile Include="Assets\Scripts\GameController\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\Menu\Button.cs" />
+     <Compile Include="Assets\Scripts\Menu\MenuAnimation.cs" />
+     <Compile Include="Assets\Scripts\Menu\MenuSystem.cs" />
+     <Compile Include="Assets\Scripts\Menu\ScaleTexture.cs" />
      <Compile Include="Assets\Scripts\Row\Block.cs" />
      <Compile Include="Assets\Scripts\Row\Row.cs" />
      <Compile Include="Assets\Scripts\Row\RowManager.cs" />

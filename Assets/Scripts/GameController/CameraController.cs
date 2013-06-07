@@ -6,9 +6,7 @@ public class CameraController : MonoBehaviour
 	
 	LevelManager level_man;
 	BallController glow_ball;
-	GameObject GameController;
 	
-	public float Camera_Speed;
 	private float camera_offset = -10;
 	private float camera_drag = 0.5f;
 	Vector3 current_pos, new_pos, old_pos;
@@ -16,8 +14,7 @@ public class CameraController : MonoBehaviour
 	void Awake()
 	{
 		// Set up scripts 
-		GameController = GameObject.Find("game_controller");
-		level_man = GameController.GetComponent<LevelManager>();
+		level_man = gameObject.GetComponent<LevelManager>();
 		glow_ball = GameObject.Find("glow_ball").GetComponent<BallController>();
 		
 		DetermineOrthographicView();
@@ -37,20 +34,16 @@ public class CameraController : MonoBehaviour
 	void Update()
 	{
 		// Update camera
-		if (!level_man.LevelCameraMove)
-			FollowBallPosition();
-		else
-			MoveCameraPosition();
+		MoveCameraPosition();
 	}
 
-	void FollowBallPosition ()
-	{
-		transform.position = new Vector3(transform.position.x, glow_ball.transform.position.y + camera_offset, transform.position.z);
-	}
-	
 	void MoveCameraPosition ()
 	{
-		transform.position = new Vector3(transform.position.x, transform.position.y - (Time.deltaTime * Camera_Speed), transform.position.z);
+		if ( transform.position.y >= (-level_man.BallIntermissionHeight+1) && 
+			transform.position.y <= 0)
+			transform.position = new Vector3(0, 0, -30);
+		else
+			transform.position = new Vector3(transform.position.x, glow_ball.transform.position.y + camera_offset, transform.position.z);
 	}
 	
 	void CameraLagUpdate()
@@ -66,10 +59,5 @@ public class CameraController : MonoBehaviour
 		
 		// Set cameras position the lagged position
 		transform.position = new Vector3(transform.position.x, current_pos.y, transform.position.z);
-	}
-	
-	public void SET_CameraSpeed(float new_speed)
-	{
-		Camera_Speed = new_speed;
 	}
 }

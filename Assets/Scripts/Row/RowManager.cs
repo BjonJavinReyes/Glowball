@@ -6,17 +6,20 @@ public class RowManager : MonoBehaviour
 {
 	LevelManager level_man;
 	BoundaryManager boundary_man;
-	GameObject GameController;
 	
 	
 	[SerializeField] GameObject RowPrefab;
 	[SerializeField] GameObject RowParent;
 	[SerializeField] GameObject RowSpawnPoint;
+	
+	[HideInInspector]
 	public List<GameObject> RowList = new List<GameObject>();
+	[HideInInspector]
 	public float Time_Between_Rows;
+	[HideInInspector]
+	public float Row_Speed;
 	
 	private float new_row_height = -2.0f;
-	public float Row_Speed;
 	private float row_death = 5.0f;		// Spacing after top boundary where rows are deleted
 	
 	public bool LevelIntermission = true;
@@ -25,9 +28,8 @@ public class RowManager : MonoBehaviour
 	void Awake()
 	{
 		// Set up scripts
-		GameController = GameObject.Find("game_controller");
-		level_man = GameController.GetComponent<LevelManager>();
 		boundary_man = GameObject.Find("Boundaries").GetComponent<BoundaryManager>();
+		level_man = gameObject.GetComponent<LevelManager>();
 		
 		Time_Between_Rows = 2.0f;	
 	}

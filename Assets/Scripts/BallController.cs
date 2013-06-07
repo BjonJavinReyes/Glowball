@@ -5,6 +5,7 @@ public class BallController : MonoBehaviour
 {
 	GameObject _GameController;
 	GameController game_controller;
+	BoundaryManager boundary_man;
 	LevelManager level_man;
 	
 	private float ball_drag = 2;
@@ -17,8 +18,12 @@ public class BallController : MonoBehaviour
 	{
 		// Store Game Controller
 		_GameController = GameObject.Find("game_controller");
+		boundary_man = GameObject.Find("Boundaries").GetComponent<BoundaryManager>();
 		game_controller = _GameController.GetComponent<GameController>();
 		level_man = _GameController.GetComponent<LevelManager>();
+		
+		//gameObject.transform.position = new Vector3(-100, level_man.BallIntermissionHeight, gameObject.transform.position.z);
+		SET_BallToIntermission();
 	}
 	
 	
@@ -45,7 +50,7 @@ public class BallController : MonoBehaviour
 				{
 					if (hit.collider.tag == "Row")
 					{
-						level_man.LevelCameraMove = true;
+						boundary_man.Close_TopBoundary();
 						gameObject.rigidbody.drag = 0;
 					}
 				}
@@ -67,6 +72,9 @@ public class BallController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.D))
 			debug_dir = 1;
 		
+		if (Input.GetKeyDown(KeyCode.Q))
+			gameObject.transform.position = new Vector3(gameObject.transform.position.x, level_man.BallIntermissionHeight, gameObject.transform.position.z);
+		
 		force = new Vector3(debug_dir * ball_speed, 0,0);
 		#else
 		float xdir = game_controller.Accelerometer.x;
@@ -84,4 +92,15 @@ public class BallController : MonoBehaviour
 		// Apply force to ball
 		gameObject.rigidbody.AddForce(force, ForceMode.Acceleration);
 	}
+	
+	public void SET_BallToIntermission()
+	{
+		gameObject.transform.position = new Vector3(gameObject.transform.position.x, -level_man.BallIntermissionHeight, gameObject.transform.position.z);	
+	}
+	
+	public void SET_BallToGameField()
+	{		
+		gameObject.transform.position = new Vector3(gameObject.transform.position.x, level_man.BallIntermissionHeight, gameObject.transform.position.z);	
+	}
+	
 }

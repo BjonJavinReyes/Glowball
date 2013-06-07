@@ -38,6 +38,21 @@ public class BoundaryManager : MonoBehaviour
 	void FollowGlowBall ()
 	{
 		// Boundaries y position should follow cameras y position
-		transform.position = new Vector3(transform.position.x, game_controller.transform.position.y, transform.position.z);
+		LeftBoundary.transform.position = new Vector3(LeftBoundary.transform.position.x, game_controller.transform.position.y, LeftBoundary.transform.position.z);
+		RightBoundary.transform.position = new Vector3(RightBoundary.transform.position.x, game_controller.transform.position.y, RightBoundary.transform.position.z);
+	}
+	
+	public void Open_TopBoundary()
+	{
+		TopBoundary.collider.enabled = false;
+		TopBoundary.renderer.enabled = false;
+		//Debug.Log("Boundary Open");
+	}
+	
+	public void Close_TopBoundary()
+	{
+		TopBoundary.collider.enabled = true;
+		TopBoundary.renderer.enabled = true;
+		//Debug.Log("Boundary Closed");
 	}
 }

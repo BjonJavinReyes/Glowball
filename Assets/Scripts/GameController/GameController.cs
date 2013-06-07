@@ -1,10 +1,19 @@
 using UnityEngine;
 using System.Collections;
 
+
 public class GameController : MonoBehaviour 
 {
+	
+	public static readonly float DEFAULT_WIDTH = 480;
+	public static readonly float DEFAULT_HEIGHT = 800;
+
 	LevelManager level_man;
-	BallController glow_ball;
+	BallController glow_ball;	
+	
+	public bool hasGameStarted = false;
+	public bool hasGamePlayStarted = false;
+	[HideInInspector]
 	public Vector3 Accelerometer;
 	private float accel_round = 0.01f;
 	
@@ -26,10 +35,9 @@ public class GameController : MonoBehaviour
 		
 		// Get Application Input
 		ApplicationInput();
-		
-		//DisplayGameTime();
 	}
 	
+	// Get Applications Input
 	void ApplicationInput()
 	{
 		// Application back button
@@ -44,15 +52,6 @@ public class GameController : MonoBehaviour
 		Accelerometer.x = RoundValue( Input.acceleration.x, accel_round);
 		Accelerometer.y = RoundValue( Input.acceleration.y, accel_round);
 		Accelerometer.z = RoundValue( Input.acceleration.z, accel_round);
-	}
-	
-	float oldtime = 0;
-	void DisplayGameTime()
-	{
-		float time = Mathf.Round(Time.timeSinceLevelLoad / 1.0f);
-		if (oldtime != time)
-			Debug.Log("Time: " + Mathf.Round(Time.timeSinceLevelLoad / 1.0f));
-		oldtime = time;
 	}
 	
 	// Round float value

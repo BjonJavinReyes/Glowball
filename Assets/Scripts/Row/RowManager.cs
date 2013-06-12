@@ -64,6 +64,9 @@ public class RowManager : MonoBehaviour
 			GameObject row;
 			row = Instantiate(RowPrefab, RowSpawnPoint.transform.position, Quaternion.identity) as GameObject;
 			row.transform.parent = RowParent.transform;
+			
+			
+			// Add row to a list
 			RowList.Add(row);
 			
 			while (true)

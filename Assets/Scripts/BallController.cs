@@ -61,7 +61,7 @@ public class BallController : MonoBehaviour
 	void BallMovement()
 	{
 		Vector3 force = Vector3.zero;
-
+		
 		#if UNITY_EDITOR
 		if (Input.GetKeyDown(KeyCode.A))
 			debug_dir = -1;

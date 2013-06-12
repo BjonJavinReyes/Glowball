@@ -61,14 +61,12 @@ public class MenuSystem : MonoBehaviour
 		Fade_Scenes.guiTexture.pixelInset = new Rect(0,0, Screen.width, Screen.height);
 		Fade_Scenes.guiTexture.color = Color.clear;	// Set transparency to zero when start of application
 		
-		// Load audio clip sounds
-		//audio_cntdwn = Resources.Load("Audio/audio_cntdwn") as AudioClip;
 	}
 	
 	void OnGUI()
 	{
 		// Make all button backgrounds transparent, we only want to see the textures on them
-		//GUI.backgroundColor = new Color(0,0,0,0);
+		GUI.backgroundColor = new Color(0,0,0,0);
 		
 		switch(Current_MenuScene)
 		{
@@ -238,7 +236,7 @@ public class MenuSystem : MonoBehaviour
 			time = 0;
 			if (i < 3)
 			{
-				Debug.Log("Game starts in: " + (3-i));
+				//Debug.Log("Game starts in: " + (3-i));
 				audio_man.PlayAudioClip((int)AudioManager.SoundClips.COUNTDOWN);
 			}
 			else

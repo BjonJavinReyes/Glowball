@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\Row\Block.cs" />
      <Compile Include="Assets\Scripts\Row\Row.cs" />
      <Compile Include="Assets\Scripts\Row\RowManager.cs" />
+     <Compile Include="Assets\Scripts\ScoreTracker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,19 +3,21 @@ using System.Collections;
 
 public class BoundaryManager : MonoBehaviour 
 {
-	GameObject _GameController;
-	BallController glow_ball;
-	LevelManager level_man;
-	GameController game_controller;
+	// Script Holders
+	BallController sc_BallController;
+	GameController sc_GameController;
+	LevelManager   sc_LevelManager;
+	ScriptHelper   sc_ScriptHelper;
 	
 	public GameObject TopBoundary, BottomBoundary, LeftBoundary, RightBoundary;
 	
-	void Awake()
+	void Start()
 	{
-		_GameController = GameObject.Find("game_controller");
-		game_controller = _GameController.GetComponent<GameController>();
-		level_man = _GameController.GetComponent<LevelManager>();
-		glow_ball = GameObject.Find("glow_ball").GetComponent<BallController>();
+		// Attach Scripts to holders
+		sc_ScriptHelper   = GameObject.FindGameObjectWithTag("Controller").GetComponent<ScriptHelper>();
+		sc_BallController = sc_ScriptHelper.sc_BallController;
+		sc_GameController = sc_ScriptHelper.sc_GameController;
+		sc_LevelManager   = sc_ScriptHelper.sc_LevelManager; 
 		
 		foreach ( Transform child in transform)
 		{
@@ -38,8 +40,12 @@ public class BoundaryManager : MonoBehaviour
 	void FollowGlowBall ()
 	{
 		// Boundaries y position should follow cameras y position
-		LeftBoundary.transform.position = new Vector3(LeftBoundary.transform.position.x, game_controller.transform.position.y, LeftBoundary.transform.position.z);
-		RightBoundary.transform.position = new Vector3(RightBoundary.transform.position.x, game_controller.transform.position.y, RightBoundary.transform.position.z);
+		LeftBoundary.transform.position = new Vector3(LeftBoundary.transform.position.x,
+														sc_GameController.transform.position.y,
+														LeftBoundary.transform.position.z);
+		RightBoundary.transform.position = new Vector3(RightBoundary.transform.position.x,
+														sc_GameController.transform.position.y,
+														RightBoundary.transform.position.z);
 	}
 	
 	public void Open_TopBoundary()
@@ -55,4 +61,6 @@ public class BoundaryManager : MonoBehaviour
 		TopBoundary.renderer.enabled = true;
 		//Debug.Log("Boundary Closed");
 	}
+	
+	
 }

@@ -3,11 +3,13 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour 
 {
-	GameController game_controller;
-	CameraController camera_controller;
-	BoundaryManager boundary_man;
-	RowManager row_man;
-	BallController glow_ball;
+	// Script Holders
+	BallController   sc_BallController;
+	BoundaryManager  sc_BoundaryManager;
+	CameraController sc_CameraController;
+	GameController   sc_GameController;
+	RowManager       sc_RowManager;
+	ScriptHelper     sc_ScriptHelper;
 	
 	public int CurrentLevel = 0;
 	public bool LevelIntermission = true;
@@ -21,14 +23,15 @@ public class LevelManager : MonoBehaviour
 	
 	public float[] IntermissionTimes = { 1.0f, 2.0f };
 	
-	void Awake()
+	void Start()
 	{
-		// Attach all scripts
-		boundary_man = GameObject.Find("Boundaries").GetComponent<BoundaryManager>();
-		glow_ball = GameObject.Find("glow_ball").GetComponent<BallController>();
-		game_controller = gameObject.GetComponent<GameController>();
-		camera_controller = gameObject.GetComponent<CameraController>();
-		row_man = gameObject.GetComponent<RowManager>();
+		// Attach Scripts to holders
+		sc_ScriptHelper     = GameObject.FindGameObjectWithTag("Controller").GetComponent<ScriptHelper>();
+		sc_BallController   = sc_ScriptHelper.sc_BallController;
+		sc_BoundaryManager  = sc_ScriptHelper.sc_BoundaryManager;
+		sc_CameraController = sc_ScriptHelper.sc_CameraController; 
+		sc_GameController   = sc_ScriptHelper.sc_GameController; 
+		sc_RowManager       = sc_ScriptHelper.sc_RowManager;
 		
 		// Set intermission time intertval
 		Time_Between_Intermission = 5.0f;
@@ -36,26 +39,23 @@ public class LevelManager : MonoBehaviour
 		// Set intermission height
 		BallIntermissionHeight = 65;
 		
-		// Sey speed at which rows move up
+		// Set speed at which rows move up
 		LevelSpeed = 2.0f;
-		row_man.SET_RowSpeed(LevelSpeed);
-	}
-	
-	void Start()
-	{
+		sc_RowManager.SET_RowSpeed(LevelSpeed);
+		
 		StartCoroutine( StartInitermission() );	
 	}
 	
 	IEnumerator StartInitermission()
 	{
-		while (!game_controller.hasGamePlayStarted)
+		while (!sc_GameController.hasGameStarted)
 		{
 			yield return null;
 		}
 		
-		glow_ball.SET_BallToGameField();
+		sc_BallController.SET_BallToGameField();
 		
-		boundary_man.Open_TopBoundary();
+		sc_BoundaryManager.Open_TopBoundary();
 		
 		float time = 0;
 		while (time < 1)
@@ -67,6 +67,6 @@ public class LevelManager : MonoBehaviour
 		LevelIntermission = false;
 		
 		// Spawn a new row
-		row_man.StartCoroutine( "CreateRow" );
+		sc_RowManager.StartCoroutine( "CreateRow" );
 	}
 }

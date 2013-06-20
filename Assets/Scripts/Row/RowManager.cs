@@ -4,9 +4,11 @@ using System.Collections.Generic;
 
 public class RowManager : MonoBehaviour 
 {
-	LevelManager level_man;
-	BoundaryManager boundary_man;
-	
+	// Script Holders
+	BoundaryManager sc_BoundaryManager;
+	LevelManager    sc_LevelManager;
+	MenuSystem      sc_MenuSystem;
+	ScriptHelper    sc_ScriptHelper;
 	
 	[SerializeField] GameObject RowPrefab;
 	[SerializeField] GameObject RowParent;
@@ -25,11 +27,13 @@ public class RowManager : MonoBehaviour
 	public bool LevelIntermission = true;
 
 	
-	void Awake()
+	void Start()
 	{
-		// Set up scripts
-		boundary_man = GameObject.Find("Boundaries").GetComponent<BoundaryManager>();
-		level_man = gameObject.GetComponent<LevelManager>();
+		// Attach Scripts to holders
+		sc_ScriptHelper    = GameObject.FindGameObjectWithTag("Controller").GetComponent<ScriptHelper>();
+		sc_BoundaryManager = sc_ScriptHelper.sc_BoundaryManager;
+		sc_MenuSystem      = sc_ScriptHelper.sc_MenuSystem;
+		sc_LevelManager    = sc_ScriptHelper.sc_LevelManager; 
 		
 		Time_Between_Rows = 2.0f;	
 	}
@@ -56,7 +60,7 @@ public class RowManager : MonoBehaviour
 	IEnumerator CreateRow ()
 	{
 		// If gameplay is not in intermission create rows
-		if (!level_man.LevelIntermission)
+		if (!sc_LevelManager.LevelIntermission)
 		{
 			//Debug.Log("Create");
 			
@@ -71,7 +75,7 @@ public class RowManager : MonoBehaviour
 			
 			while (true)
 			{
-				if (row.transform.position.y - boundary_man.BottomBoundary.transform.position.y > new_row_height)
+				if (row.transform.position.y - sc_BoundaryManager.BottomBoundary.transform.position.y > new_row_height)
 					break;
 				
 				yield return null;
@@ -88,7 +92,9 @@ public class RowManager : MonoBehaviour
 	}
 	
 	void RowUpdate ()
-	{	
+	{			
+		if (!sc_MenuSystem.isGamePlayMoving()) return;
+			
 		// Update each rows y position
 		foreach (GameObject row in RowList)
 		{
@@ -96,12 +102,13 @@ public class RowManager : MonoBehaviour
 															row.gameObject.transform.position.y + (Time.deltaTime * Row_Speed),
 												 			row.gameObject.transform.position.z);
 			
-			if (row.gameObject.transform.position.y > boundary_man.TopBoundary.transform.position.y + row_death)
+			if (row.gameObject.transform.position.y > sc_BoundaryManager.TopBoundary.transform.position.y + row_death)
 			{
 				RowList.Remove(row);
 				Destroy(row);
 				break;
 			}
 		}
+		
 	}
 }

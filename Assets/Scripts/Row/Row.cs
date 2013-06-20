@@ -10,14 +10,12 @@ public class Row : MonoBehaviour
 	public GameObject[] EmptySections;
 	public int[] EmptySectionNum;
 	
-	Vector3 BlockSize;
-	
-	
+	Vector3 BlockSize;	
 	
 	GameObject BlockParent;
 	GameObject ColliderParent;
 	
-	void Awake()
+	void Start()
 	{
 		// Get parent gameObjects for Blocks and Colliders
 		foreach(Transform child in transform)

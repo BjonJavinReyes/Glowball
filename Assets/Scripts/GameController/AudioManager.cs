@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
 		GAMEPLAYMUSIC_ONE = 0,
 	}
 	
-	void Awake()
+	void Start()
 	{
 		// Set up sound dictionary
 		soundDictionary = new Dictionary<int, AudioClip>();

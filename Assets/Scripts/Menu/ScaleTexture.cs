@@ -5,7 +5,7 @@ public class ScaleTexture : MonoBehaviour
 {
 	float ScreenRatio;
 	
-	void Awake()
+	void Start()
 	{
 		// Scale Texture Size
 		ScaleImagesToResolution();

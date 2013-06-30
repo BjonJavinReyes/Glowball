@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
 	void Start()
 	{
 		// Attach Scripts to holders
-		sc_ScriptHelper   = GameObject.FindGameObjectWithTag("Controller").GetComponent<ScriptHelper>();
+		sc_ScriptHelper   = Camera.main.GetComponent<ScriptHelper>();
 		sc_BallController = sc_ScriptHelper.sc_BallController;
 		sc_FadeToScene    = sc_ScriptHelper.sc_FadeToScene;
 		sc_MenuSystem     = sc_ScriptHelper.sc_MenuSystem;
@@ -35,7 +35,8 @@ public class GameController : MonoBehaviour
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		
 		// Make screen fade in
-		sc_FadeToScene.FadeInScene();	
+		if (Application.loadedLevelName == "Game")
+			sc_FadeToScene.FadeInScene();	
 	}
 	
 	void Update()

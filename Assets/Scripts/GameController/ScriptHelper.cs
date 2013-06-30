@@ -25,7 +25,7 @@ public class ScriptHelper : MonoBehaviour
 	void FindScripts ()
 	{
 		// Find Controller GameObject
-		GameObject controller =  GameObject.FindGameObjectWithTag("Controller");
+		GameObject controller =  Camera.main.gameObject;
 	
 		// Attach scripts that are attached to controller object
 		sc_CameraController = controller.GetComponent<CameraController>();

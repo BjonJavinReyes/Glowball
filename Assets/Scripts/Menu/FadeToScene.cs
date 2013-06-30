@@ -10,7 +10,7 @@ public class FadeToScene : MonoBehaviour
 	void Start()
 	{
 		// Attach Scripts to holders
-		sc_ScriptHelper   = GameObject.FindGameObjectWithTag("Controller").GetComponent<ScriptHelper>();
+		sc_ScriptHelper   = Camera.main.GetComponent<ScriptHelper>();
 		sc_MenuSystem     = sc_ScriptHelper.sc_MenuSystem;
 		
 		// Create Black Fade texture (black texture that fills entire screen);
@@ -48,12 +48,15 @@ public class FadeToScene : MonoBehaviour
 		gameObject.guiTexture.color = Color.clear;
 		
 		sc_MenuSystem.CanUseButton = true;
+		
+		// Set object position to be behind all gui
+		gameObject.transform.position = new Vector3(0,0,-2);
 	}
 	
 	IEnumerator FadeScene(string sceneName)
 	{	
-		// Set object position to be behind some gui
-		gameObject.transform.position = Vector3.zero;
+		// Set object position to be above all gui
+		gameObject.transform.position = new Vector3(0,0,1);
 		
 		// Fade Transparent to Black
 		float time = 0;
@@ -71,5 +74,8 @@ public class FadeToScene : MonoBehaviour
 		
 		//Load new level/scene
 		Application.LoadLevel(sceneName);
+		
+		// Set object position to be behind all gui
+		gameObject.transform.position = new Vector3(0,0,-2);
 	}
 }

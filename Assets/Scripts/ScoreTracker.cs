@@ -19,7 +19,7 @@ public class ScoreTracker : MonoBehaviour
 	void Start()
 	{
 		// Attach Scripts to holders
-		sc_ScriptHelper = GameObject.FindGameObjectWithTag("Controller").GetComponent<ScriptHelper>();
+		sc_ScriptHelper = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ScriptHelper>();
 		sc_LevelManager = sc_ScriptHelper.sc_LevelManager; 
 		sc_MenuSystem   = sc_ScriptHelper.sc_MenuSystem;
 		

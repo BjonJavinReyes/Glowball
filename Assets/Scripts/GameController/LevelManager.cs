@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
 	void Start()
 	{
 		// Attach Scripts to holders
-		sc_ScriptHelper     = GameObject.FindGameObjectWithTag("Controller").GetComponent<ScriptHelper>();
+		sc_ScriptHelper     = Camera.main.GetComponent<ScriptHelper>();
 		sc_BallController   = sc_ScriptHelper.sc_BallController;
 		sc_BoundaryManager  = sc_ScriptHelper.sc_BoundaryManager;
 		sc_CameraController = sc_ScriptHelper.sc_CameraController; 

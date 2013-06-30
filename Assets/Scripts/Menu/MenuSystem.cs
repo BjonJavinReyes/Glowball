@@ -11,8 +11,6 @@ public class MenuSystem : MonoBehaviour
 	GameController sc_GameController;
 	ScriptHelper   sc_ScriptHelper;
 	
-	GameObject MainMenu;
-	List<GameObject> MainMenuItems = new List<GameObject>();
 	
 	[HideInInspector] public bool CanUseButton = true;
 	[HideInInspector] public MenuScene Current_MenuScene;
@@ -28,33 +26,15 @@ public class MenuSystem : MonoBehaviour
 		CREDITS
 	};
 	
-	#region Buttons
-	Button btn_start_game;
-	#endregion
 	
 	void Start()
 	{
 		// Attach Scripts to holders
-		sc_ScriptHelper   = GameObject.FindGameObjectWithTag("Controller").GetComponent<ScriptHelper>();
+		sc_ScriptHelper   = Camera.main.GetComponent<ScriptHelper>();
 		sc_AudioManager   = sc_ScriptHelper.sc_AudioManager;
 		sc_FadeToScene    = sc_ScriptHelper.sc_FadeToScene;
 		sc_GameController = sc_ScriptHelper.sc_GameController;
-		
-		foreach ( Transform child in gameObject.transform)
-		{
-			if (child.name == "menu")
-				MainMenu = child.gameObject;
-		}
-		
-		foreach ( Transform child in MainMenu.transform)
-			MainMenuItems.Add(child.gameObject);
-		
-		// Get all buttons in menu and add them to list
-		foreach ( Button btn in MainMenu.GetComponentsInChildren<Button>())
-		{
-			if ( btn.Button_Name == "Start Game")
-				btn_start_game = btn;
-		}
+	
 		
 		// Set current scene to main menu
 		if (Application.loadedLevelName == "Menu")
@@ -79,7 +59,6 @@ public class MenuSystem : MonoBehaviour
 			}
 			case MenuScene.GAME_OVER:
 			{
-				Button_Game_to_MenuScreen();
 				break;
 			}
 			case MenuScene.PAUSE_GAME:
@@ -94,7 +73,6 @@ public class MenuSystem : MonoBehaviour
 			// Menu Related
 			case MenuScene.MAIN_MENU:
 			{
-				CheckButtons_MainMenu();
 				break;
 			}
 			case MenuScene.INSTRUCTIONS:
@@ -113,30 +91,14 @@ public class MenuSystem : MonoBehaviour
 		}
 	}
 
-	void CheckButtons_MainMenu ()
-	{
-		Button_Start();
-	}
-	
 	void CheckButtons_GamePlaying ()
 	{
 		if (!sc_GameController.hasGameStarted)
 			Button_StartGamePlay();
 	}
+	
+	
 	#region Buttons
-	void Button_Start()
-	{
-		if (CanUseButton)
-		{
-			if ( GUI.Button( new Rect( btn_start_game.UpperLeftPos.x, btn_start_game.UpperLeftPos.y,
-									   btn_start_game.guiTexture.pixelInset.width, btn_start_game.guiTexture.pixelInset.height), "") )
-			{
-				CanUseButton = false;
-				StartCoroutine( AnimateObjects(true) );
-				sc_FadeToScene.FadeToNewScene("Game");
-			}
-		}
-	}
 	
 	void Button_StartGamePlay()
 	{
@@ -150,41 +112,7 @@ public class MenuSystem : MonoBehaviour
 			}
 		}
 	}
-	
-	void Button_Game_to_MenuScreen()
-	{
-		if (CanUseButton)
-		{
-			if ( GUI.Button( new Rect( 0, 0, Screen.width, Screen.height), "") )
-			{
-				StartCoroutine( AnimateObjects(false));
-				Current_MenuScene = MenuScene.MAIN_MENU;
-			}
-		}
-	}
-	
 	#endregion
-	
-	IEnumerator AnimateObjects(bool fadeToGame)
-	{
-		if (fadeToGame)
-		{
-			foreach (GameObject item in MainMenuItems)
-			{
-				item.GetComponent<MenuAnimation>().AnimationOut();
-				yield return null;
-			}
-		}
-		else
-		{
-			foreach (GameObject item in MainMenuItems)
-			{
-				item.GetComponent<MenuAnimation>().AnimationIn();
-				yield return null;
-			}
-		}
-			
-	}
 	
 	IEnumerator StartGameplay()
 	{

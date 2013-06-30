@@ -52,10 +52,13 @@
      <Compile Include="Assets\Scripts\GameController\GameController.cs" />
      <Compile Include="Assets\Scripts\GameController\LevelManager.cs" />
      <Compile Include="Assets\Scripts\GameController\ScriptHelper.cs" />
-     <Compile Include="Assets\Scripts\Menu\Button.cs" />
+     <Compile Include="Assets\Scripts\Menu\Buttons\Button.cs" />
+     <Compile Include="Assets\Scripts\Menu\Buttons\ButtonManager.cs" />
+     <Compile Include="Assets\Scripts\Menu\Buttons\ButtonTransition.cs" />
      <Compile Include="Assets\Scripts\Menu\FadeToScene.cs" />
      <Compile Include="Assets\Scripts\Menu\MenuAnimation.cs" />
      <Compile Include="Assets\Scripts\Menu\MenuSystem.cs" />
+     <Compile Include="Assets\Scripts\Menu\MenuTransition.cs" />
      <Compile Include="Assets\Scripts\Menu\ScaleTexture.cs" />
      <Compile Include="Assets\Scripts\Row\Block.cs" />
      <Compile Include="Assets\Scripts\Row\Row.cs" />

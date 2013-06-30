@@ -18,7 +18,7 @@ public class BallController : MonoBehaviour
 	void Start()
 	{
 		// Attach Scripts to holders
-		sc_ScriptHelper    = GameObject.FindGameObjectWithTag("Controller").GetComponent<ScriptHelper>();
+		sc_ScriptHelper    = Camera.main.GetComponent<ScriptHelper>();
 		sc_BoundaryManager = sc_ScriptHelper.sc_BoundaryManager;
 		sc_GameController  = sc_ScriptHelper.sc_GameController;
 		sc_LevelManager    = sc_ScriptHelper.sc_LevelManager; 
@@ -80,7 +80,7 @@ public class BallController : MonoBehaviour
 		
 		force = new Vector3(debug_dir * ball_speed, 0,0);
 		#else
-		float xdir = game_controller.Accelerometer.x;
+		float xdir = sc_GameController.Accelerometer.x;
 		if ( Mathf.Abs(xdir) < dead_speed) return;
 		if ( Mathf.Abs(xdir) > dead_speed && Mathf.Abs(xdir) < 0.5f)
 		{

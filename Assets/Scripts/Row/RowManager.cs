@@ -30,7 +30,7 @@ public class RowManager : MonoBehaviour
 	void Start()
 	{
 		// Attach Scripts to holders
-		sc_ScriptHelper    = GameObject.FindGameObjectWithTag("Controller").GetComponent<ScriptHelper>();
+		sc_ScriptHelper    = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ScriptHelper>();
 		sc_BoundaryManager = sc_ScriptHelper.sc_BoundaryManager;
 		sc_MenuSystem      = sc_ScriptHelper.sc_MenuSystem;
 		sc_LevelManager    = sc_ScriptHelper.sc_LevelManager; 

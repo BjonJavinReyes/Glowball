@@ -11,8 +11,8 @@ public class ScriptHelper : MonoBehaviour
 	[HideInInspector] public CameraController sc_CameraController;
 	[HideInInspector] public FadeToScene      sc_FadeToScene;
 	[HideInInspector] public GameController   sc_GameController;
+	[HideInInspector] public HighScoreManager sc_HighScoreManager;
 	[HideInInspector] public LevelManager     sc_LevelManager;
-	[HideInInspector] public MenuSystem       sc_MenuSystem;	
 	[HideInInspector] public RowManager       sc_RowManager;
 	[HideInInspector] public ScoreTracker     sc_ScoreTracker;
 	
@@ -35,8 +35,8 @@ public class ScriptHelper : MonoBehaviour
 		
 		// Find Scripts not attached to controller object
 		sc_AudioManager     = GameObject.Find("audio_manager").GetComponent<AudioManager>();
-		sc_MenuSystem       = GameObject.Find("Menu").GetComponent<MenuSystem>();
 		sc_FadeToScene      = GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeToScene>();
+		sc_HighScoreManager = GameObject.FindGameObjectWithTag("Scores").GetComponent<HighScoreManager>();
 				
 		if (CheckObjectExist("score_tracker"))
 			sc_ScoreTracker     = GameObject.Find("score_tracker").GetComponent<ScoreTracker>();

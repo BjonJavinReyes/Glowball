@@ -1,12 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BallController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Score/HighScoreManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/Menu/MenuTransition.cs" Line="39" Column="3" />
-      <File FileName="Assets/Scripts/Menu/MenuAnimation.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameController/AudioManager.cs" Line="38" Column="25" />
-      <File FileName="Assets/Scripts/Menu/MenuSystem.cs" Line="132" Column="5" />
-      <File FileName="Assets/Scripts/BallController.cs" Line="83" Column="33" />
+      <File FileName="Assets/Scripts/GameController/GameController.cs" Line="45" Column="3" />
+      <File FileName="Assets/Scripts/Menus/MenuTransition.cs" Line="103" Column="43" />
+      <File FileName="Assets/Scripts/Score/ScoreTracker.cs" Line="72" Column="3" />
+      <File FileName="Assets/Scripts/Score/HighScoreManager.cs" Line="107" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using PlayerPrefs = PreviewLabs.PlayerPrefs;
 
 
 public class GameController : MonoBehaviour 
@@ -10,15 +11,15 @@ public class GameController : MonoBehaviour
 	// Script Holders
 	BallController sc_BallController;
 	FadeToScene    sc_FadeToScene;
-	LevelManager   sc_LevelManager;
-	MenuSystem     sc_MenuSystem;
-	ScoreTracker   sc_ScoreTracker;
 	ScriptHelper   sc_ScriptHelper;
 	
 	[HideInInspector] public Vector3 Accelerometer;
 	
-	public bool hasGameStarted = false;
-	public bool useGameInput = false;
+	public  bool isGamePaused;
+	public  bool isGameOver;
+	private bool gameOver_Once;
+	public  bool hasGameStarted;
+	public  bool useGameInput;
 	private float accel_round = 0.01f;
 	
 	void Start()
@@ -27,26 +28,34 @@ public class GameController : MonoBehaviour
 		sc_ScriptHelper   = Camera.main.GetComponent<ScriptHelper>();
 		sc_BallController = sc_ScriptHelper.sc_BallController;
 		sc_FadeToScene    = sc_ScriptHelper.sc_FadeToScene;
-		sc_MenuSystem     = sc_ScriptHelper.sc_MenuSystem;
-		sc_LevelManager   = sc_ScriptHelper.sc_LevelManager; 
-		sc_ScoreTracker   = sc_ScriptHelper.sc_ScoreTracker;
 		
 		// Tell screen to not dim
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		
+		// Set booleans
+		isGamePaused   = false;
+		isGameOver     = false;
+		gameOver_Once  = false;
+		hasGameStarted = false;
+		useGameInput   = true;
+		
 		// Make screen fade in
 		if (Application.loadedLevelName == "Game")
-			sc_FadeToScene.FadeInScene();	
+			sc_FadeToScene.FadeInScene(); 
 	}
 	
 	void Update()
 	{		
+		if (isGameOver)
+			Execute_GameOver();
+		
 		// Get Applications rotational value (accelerometer)
 		if ( useGameInput )
 			GET_Accelermeter();
 		
 		// Get Application Input
 		ApplicationInput();
+		
 	}
 	
 	// Get Applications Input
@@ -55,7 +64,22 @@ public class GameController : MonoBehaviour
 		// Application back button
 		if ( Input.GetKeyDown(KeyCode.Escape))
 			Application.Quit();
+		
+		/////////////////////////////////////////////////
+		// DEBUG LOG, ONLY USED FOR TESTING!
+		/////////////////////////////////////////////////
+		if ( Input.GetKeyDown(KeyCode.Escape))
+		{
+			Debug.Log("--  FORCED GAME OVER  --");
+			isGameOver = true;
+		}
 	}
+	
+	public void OnApplicationQuit()
+	{
+		PlayerPrefs.Flush();
+	}
+	
 	
 	// Get Phones Accelerometer details
 	void GET_Accelermeter()
@@ -65,18 +89,35 @@ public class GameController : MonoBehaviour
 		Accelerometer.y = RoundValue( Input.acceleration.y, accel_round);
 		Accelerometer.z = RoundValue( Input.acceleration.z, accel_round);
 	}
-	
+
 	// Round float value
 	float RoundValue(float what, float to)
 	{
 		return to * Mathf.Round(what/to);
 	}
 	
-	public void GameOver()
+	void Execute_GameOver()
 	{
-		hasGameStarted = false;	
+		// Only produce game over once
+		if (gameOver_Once) return;
+		gameOver_Once = true;
 		
+		// Freeze ball movement
 		sc_BallController.FreezeBall();	
-		sc_MenuSystem.Current_MenuScene = MenuSystem.MenuScene.GAME_OVER;
+		
+		// Play animation for game over
+		Animation anim = GameObject.Find("Game Over Transition").GetComponent<Animation>();
+		anim.Play("game_over");
+	}
+	
+	public bool isGameRunning()
+	{
+		//Debug.Log("gp: " + isGamePaused + "  go: " + isGameOver + "  gs: " + hasGameStarted);
+		
+		if (!isGamePaused &&
+			!isGameOver   && 
+			hasGameStarted)
+			return true;
+		else return false;
 	}
 }

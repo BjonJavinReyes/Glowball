@@ -44,26 +44,27 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BallController.cs" />
-     <Compile Include="Assets\Scripts\BoundaryManager.cs" />
      <Compile Include="Assets\Scripts\DebugLog.cs" />
+     <Compile Include="Assets\Scripts\Game\BallController.cs" />
+     <Compile Include="Assets\Scripts\Game\BoundaryManager.cs" />
+     <Compile Include="Assets\Scripts\Game\GameOver\GameOver_HighScore.cs" />
+     <Compile Include="Assets\Scripts\Game\Row\Block.cs" />
+     <Compile Include="Assets\Scripts\Game\Row\Row.cs" />
+     <Compile Include="Assets\Scripts\Game\Row\RowManager.cs" />
      <Compile Include="Assets\Scripts\GameController\AudioManager.cs" />
      <Compile Include="Assets\Scripts\GameController\CameraController.cs" />
      <Compile Include="Assets\Scripts\GameController\GameController.cs" />
      <Compile Include="Assets\Scripts\GameController\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\GameController\PlayerPrefs.cs" />
      <Compile Include="Assets\Scripts\GameController\ScriptHelper.cs" />
-     <Compile Include="Assets\Scripts\Menu\Buttons\Button.cs" />
-     <Compile Include="Assets\Scripts\Menu\Buttons\ButtonManager.cs" />
-     <Compile Include="Assets\Scripts\Menu\Buttons\ButtonTransition.cs" />
-     <Compile Include="Assets\Scripts\Menu\FadeToScene.cs" />
-     <Compile Include="Assets\Scripts\Menu\MenuAnimation.cs" />
-     <Compile Include="Assets\Scripts\Menu\MenuSystem.cs" />
-     <Compile Include="Assets\Scripts\Menu\MenuTransition.cs" />
-     <Compile Include="Assets\Scripts\Menu\ScaleTexture.cs" />
-     <Compile Include="Assets\Scripts\Row\Block.cs" />
-     <Compile Include="Assets\Scripts\Row\Row.cs" />
-     <Compile Include="Assets\Scripts\Row\RowManager.cs" />
-     <Compile Include="Assets\Scripts\ScoreTracker.cs" />
+     <Compile Include="Assets\Scripts\Menus\Buttons\Button.cs" />
+     <Compile Include="Assets\Scripts\Menus\Buttons\ButtonManager.cs" />
+     <Compile Include="Assets\Scripts\Menus\Buttons\ButtonTransition.cs" />
+     <Compile Include="Assets\Scripts\Menus\FadeToScene.cs" />
+     <Compile Include="Assets\Scripts\Menus\MenuTransition.cs" />
+     <Compile Include="Assets\Scripts\Menus\ScaleTexture.cs" />
+     <Compile Include="Assets\Scripts\Score\HighScoreManager.cs" />
+     <Compile Include="Assets\Scripts\Score\ScoreTracker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

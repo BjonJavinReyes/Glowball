@@ -12,7 +12,6 @@ public class AudioManager : MonoBehaviour
 	//////////////////////////////////////////
 	// Sound Effects
 	[SerializeField] AudioClip CountDown;
-	[SerializeField] AudioClip CountDown_Go;
 	[SerializeField] AudioClip Menu_Select;
 	[SerializeField] AudioClip Menu_Transition_In;
 	[SerializeField] AudioClip Menu_Transition_Out;
@@ -21,13 +20,14 @@ public class AudioManager : MonoBehaviour
 	public bool  SoundEffects_On;
 	public bool  Music_On;
 	
+	public float MasterVolume;
+	
 	public Dictionary<int, AudioClip> soundDictionary;
 	public Dictionary<int, AudioClip> musicDictionary;
 	
 	public enum SoundClips
 	{
 		COUNTDOWN = 0,
-		COUNTDOWN_GO,
 		MENU_SELECT,
 		MENU_TRANSITION_IN,
 		MENU_TRANSITION_OUT
@@ -49,7 +49,6 @@ public class AudioManager : MonoBehaviour
 		
 		// Add audio clips to dictionary
 		soundDictionary.Add((int)SoundClips.COUNTDOWN, CountDown);
-		soundDictionary.Add((int)SoundClips.COUNTDOWN_GO, CountDown_Go);
 		soundDictionary.Add((int)SoundClips.MENU_SELECT, Menu_Select);
 		soundDictionary.Add((int)SoundClips.MENU_TRANSITION_IN, Menu_Transition_In);
 		soundDictionary.Add((int)SoundClips.MENU_TRANSITION_OUT, Menu_Transition_Out);
@@ -57,6 +56,14 @@ public class AudioManager : MonoBehaviour
 		// Set Audio settings to on for both soundeffects and music
 		SoundEffects_On = true;
 		Music_On = true;
+		
+		// Set Master Volume
+		MasterVolume = gameObject.audio.volume;
+	}
+	
+	void Update()
+	{
+		gameObject.audio.volume = MasterVolume;	
 	}
 	
 	public void PlayAudioClip(int key)
@@ -80,7 +87,7 @@ public class AudioManager : MonoBehaviour
 		
 		// If dictionary contains audio track play it
 		if( musicDictionary.ContainsKey(key) && musicDictionary[key])
-			audio.PlayOneShot(musicDictionary[key], 1.0f);
+			audio.PlayOneShot(musicDictionary[key], 0.8f);
 		
 	}
 }

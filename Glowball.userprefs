@@ -1,11 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Score/HighScoreManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/VersionNumber.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameController/GameController.cs" Line="45" Column="3" />
-      <File FileName="Assets/Scripts/Menus/MenuTransition.cs" Line="103" Column="43" />
-      <File FileName="Assets/Scripts/Score/ScoreTracker.cs" Line="72" Column="3" />
-      <File FileName="Assets/Scripts/Score/HighScoreManager.cs" Line="107" Column="18" />
+      <File FileName="Assets/Scripts/VersionNumber.cs" Line="25" Column="1" />
+      <File FileName="Assets/Scripts/Menus/FadeToScene.cs" Line="14" Column="55" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

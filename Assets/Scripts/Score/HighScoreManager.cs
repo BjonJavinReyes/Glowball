@@ -84,31 +84,35 @@ public class HighScoreManager : MonoBehaviour
 	    PlayerPrefs.SetInt(("leader_score_" + recordIndex).ToString(), score);
 		PlayerPrefs.SetString(("leader_name_" + recordIndex).ToString(), name);
 	}
-	void SetNewScore(int recordIndex, int score)
+	
+	IEnumerator SetNewScore(int recordIndex, int score)
 	{	
 		// Get the players name so it can be added to the leaderboards
-		string name = GetPlayerName();
+		string name = "";
+		#if UNITY_ANDROID && !UNITY_EDITOR
+		TouchScreenKeyboard keyboard;
+
+		while (true)
+		{
+			keyboard = TouchScreenKeyboard.Open(name, TouchScreenKeyboardType.NamePhonePad, false, false, false, false, "Enter Four Initials");
+			while (keyboard.active) 
+				yield return null;
+			
+			name = keyboard.text;
+		
+			if (name != "" && name.Length <= 4)
+				break;
+		}
+		#else
+		name = "NAME";
+		
+		#endif
 		
 		// Record name and score
 		PlayerPrefs.SetInt(("leader_score_" + recordIndex).ToString(), score);
 		PlayerPrefs.SetString(("leader_name_" + recordIndex).ToString(), name);
-	}
-	string GetPlayerName()
-	{	
-		TouchScreenKeyboard keyboard;
-		string initials = "";
 		
-		while (true)
-		{
-	        keyboard = TouchScreenKeyboard.Open(initials, TouchScreenKeyboardType.Default, false, false, false, false, "Enter Four Initials");
-			if (keyboard.active) 
-	        	initials = keyboard.text;
-			
-			if (initials != "" && initials.Length <= 4)
-				break;
-		}
-		
-		return initials;
+		yield return null;
 	}
 	
 	bool isHighScore(int score)
@@ -142,7 +146,7 @@ public class HighScoreManager : MonoBehaviour
 	void ResetLeaderboards(int index, int score)
 	{
 		// Set Players Score
-		SetNewScore(index, score);
+		StartCoroutine( SetNewScore(index, score) );
 		
 		// Set the rest of the scores
 		for (int i = index+1; i < MAX_SCORES; i++)

@@ -15,12 +15,15 @@ public class GameController : MonoBehaviour
 	
 	[HideInInspector] public Vector3 Accelerometer;
 	
+	[HideInInspector] public float Product_VersionNumber;
+	
 	public  bool isGamePaused;
 	public  bool isGameOver;
 	private bool gameOver_Once;
 	public  bool hasGameStarted;
 	public  bool useGameInput;
 	private float accel_round = 0.01f;
+	
 	
 	void Start()
 	{
@@ -39,13 +42,16 @@ public class GameController : MonoBehaviour
 		hasGameStarted = false;
 		useGameInput   = true;
 		
+		// Set Product Version Number
+		Product_VersionNumber = 1.0f;
+		
 		// Make screen fade in
 		if (Application.loadedLevelName == "Game")
 			sc_FadeToScene.FadeInScene(); 
 	}
 	
 	void Update()
-	{		
+	{			
 		if (isGameOver)
 			Execute_GameOver();
 		
@@ -64,7 +70,8 @@ public class GameController : MonoBehaviour
 		// Application back button
 		if ( Input.GetKeyDown(KeyCode.Escape))
 			Application.Quit();
-		
+
+#if UNITY_EDITOR
 		/////////////////////////////////////////////////
 		// DEBUG LOG, ONLY USED FOR TESTING!
 		/////////////////////////////////////////////////
@@ -73,6 +80,8 @@ public class GameController : MonoBehaviour
 			Debug.Log("--  FORCED GAME OVER  --");
 			isGameOver = true;
 		}
+#endif
+		
 	}
 	
 	public void OnApplicationQuit()

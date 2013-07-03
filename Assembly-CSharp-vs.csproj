@@ -61,10 +61,13 @@
      <Compile Include="Assets\Scripts\Menus\Buttons\ButtonManager.cs" />
      <Compile Include="Assets\Scripts\Menus\Buttons\ButtonTransition.cs" />
      <Compile Include="Assets\Scripts\Menus\FadeToScene.cs" />
+     <Compile Include="Assets\Scripts\Menus\GameplayTransition.cs" />
+     <Compile Include="Assets\Scripts\Menus\MainMenuTransition.cs" />
      <Compile Include="Assets\Scripts\Menus\MenuTransition.cs" />
      <Compile Include="Assets\Scripts\Menus\ScaleTexture.cs" />
      <Compile Include="Assets\Scripts\Score\HighScoreManager.cs" />
      <Compile Include="Assets\Scripts\Score\ScoreTracker.cs" />
+     <Compile Include="Assets\Scripts\VersionNumber.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

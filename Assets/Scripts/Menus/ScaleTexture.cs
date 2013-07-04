@@ -9,10 +9,6 @@ public class ScaleTexture : MonoBehaviour
 	{
 		// Scale Texture Size
 		ScaleImagesToResolution();
-		
-		// If texture is also a button scale button size as well
-		if (gameObject.GetComponent<Button>())
-			gameObject.GetComponent<Button>().ScaleaButtonSize();
 	}
 	
 	void ScaleImagesToResolution()

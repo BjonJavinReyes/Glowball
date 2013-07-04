@@ -1,9 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/VersionNumber.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Menus/Buttons/Slider.cs">
     <Files>
-      <File FileName="Assets/Scripts/VersionNumber.cs" Line="25" Column="1" />
-      <File FileName="Assets/Scripts/Menus/FadeToScene.cs" Line="14" Column="55" />
+      <File FileName="Assets/Scripts/GameController/GameController.cs" Line="89" Column="3" />
+      <File FileName="Assets/Scripts/Menus/Buttons/ButtonTransition.cs" Line="32" Column="5" />
+      <File FileName="Assets/Scripts/Menus/Buttons/ButtonManager.cs" Line="46" Column="12" />
+      <File FileName="Assets/Scripts/Game/BallController.cs" Line="30" Column="38" />
+      <File FileName="Assets/Scripts/Menus/Buttons/Slider.cs" Line="7" Column="47" />
+      <File FileName="Assets/Scripts/SettingsController.cs" Line="39" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

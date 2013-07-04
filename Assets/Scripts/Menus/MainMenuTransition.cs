@@ -8,23 +8,16 @@ public class MainMenuTransition : MenuTransition
 		// Call base class to get initial variable setup like scripts
 		base.Start(); 
 		
-		// If Main Menu Transition play the main menu entrance animation
 		if (gameObject.name == "Main Menu Transition")
-			Transition_to_MainMenu("main_entrance");
-		
-		//StartCoroutine( Initialize() );
+			StartCoroutine( DelayOpening() );
 	}
 	
-	IEnumerator Initialize()
+	IEnumerator DelayOpening()
 	{
-		#if UNITY_ANDROID && !UNITY_EDITOR
-		yield return new WaitForSeconds(4);
-		#endif
-		
-		
-		yield return null;
+		// Wait for Fade in to complete
+		yield return new WaitForSeconds(2.0f);
+		Transition_to_MainMenu("main_entrance");
 	}
-	
 	
 	void Menu_to_Game()
 	{
@@ -47,8 +40,19 @@ public class MainMenuTransition : MenuTransition
 		TransitionFromMenu("Information Transition", "information");	
 	}
 	
+	void Sensitivity_to_Settings()
+	{
+		// Deactivate the scene
+		gameObject.GetComponentInChildren<SettingsController>().DeactivateBallSettings();
+	}
 	
-	private void TransitionFromMenu(string transition, string clip_name)
+	void Settings_to_Sensitivity()
+	{
+		// Activate the scene
+		gameObject.GetComponentInChildren<SettingsController>().ActivateBallSettings();
+	}
+	
+	void TransitionFromMenu(string transition, string clip_name)
 	{
 		GameObject go = GameObject.Find(transition);
 		Animation anim = go.GetComponent<Animation>();

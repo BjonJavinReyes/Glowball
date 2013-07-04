@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using PlayerPrefs = PreviewLabs.PlayerPrefs;
 
 public class BallController : MonoBehaviour 
 {
@@ -9,27 +10,35 @@ public class BallController : MonoBehaviour
 	LevelManager    sc_LevelManager;
 	ScriptHelper    sc_ScriptHelper;
 	
+	public bool isTestBall;
+	
 	private float ball_drag = 2;
-	private float ball_speed = 28.0f;
+	public float ball_speed;
 	private float dead_speed = 0.1f;
 	private float raycast_height = 30;
 	private float debug_dir = 0f;
 	
 	void Start()
-	{
+	{	
 		// Attach Scripts to holders
 		sc_ScriptHelper    = Camera.main.GetComponent<ScriptHelper>();
 		sc_BoundaryManager = sc_ScriptHelper.sc_BoundaryManager;
 		sc_GameController  = sc_ScriptHelper.sc_GameController;
 		sc_LevelManager    = sc_ScriptHelper.sc_LevelManager; 
 		
+		// Get users saved settings for ball sensitivity
+		ball_speed = PlayerPrefs.GetFloat("glow_ball_speed", 9.0f);
+		
+		if (!isTestBall)
 		// Set the ball to the first intermission height
 		SET_BallToIntermission();
 	}
 	
 	void Update()
 	{
-		BallDrag();
+		if (!isTestBall)
+			BallDrag();
+		
 		BallMovement();
 	}
 	
@@ -93,7 +102,7 @@ public class BallController : MonoBehaviour
 		#endif
 			
 		// Apply force to ball
-		gameObject.rigidbody.AddForce(force, ForceMode.Acceleration);
+		gameObject.rigidbody.AddForce(force, ForceMode.Impulse);
 	}
 	
 	public void SET_BallToIntermission()
@@ -122,7 +131,7 @@ public class BallController : MonoBehaviour
 	
 	void OnTriggerEnter(Collider hit)
 	{
-		if (sc_LevelManager.LevelIntermission) return;
+		if (sc_LevelManager.LevelIntermission || isTestBall) return;
 		
 		if (hit.tag == "Top Boundary")
 			sc_GameController.isGameOver = true;

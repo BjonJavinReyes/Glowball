@@ -29,7 +29,7 @@ public class ButtonTransition : MonoBehaviour
 		
 		buttonUsed = true;	//Button was hit, set boolean to true;
 		
-		Debug.Log("Hit Button: " + gameObject.name);
+		//Debug.Log("Hit Button: " + gameObject.name);
 		
 		// Perform animation
 		if (ReverseAnimation)

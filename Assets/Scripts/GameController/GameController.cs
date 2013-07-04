@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
 	public static readonly float DEFAULT_HEIGHT = 800;
 		
 	// Script Holders
+	AudioManager   sc_AudioManager;
 	BallController sc_BallController;
 	FadeToScene    sc_FadeToScene;
 	ScriptHelper   sc_ScriptHelper;
@@ -29,6 +30,7 @@ public class GameController : MonoBehaviour
 	{
 		// Attach Scripts to holders
 		sc_ScriptHelper   = Camera.main.GetComponent<ScriptHelper>();
+		sc_AudioManager   = sc_ScriptHelper.sc_AudioManager;
 		sc_BallController = sc_ScriptHelper.sc_BallController;
 		sc_FadeToScene    = sc_ScriptHelper.sc_FadeToScene;
 		
@@ -46,8 +48,7 @@ public class GameController : MonoBehaviour
 		Product_VersionNumber = 1.0f;
 		
 		// Make screen fade in
-		if (Application.loadedLevelName == "Game")
-			sc_FadeToScene.FadeInScene(); 
+		sc_FadeToScene.FadeInScene(1.5f); 
 	}
 	
 	void Update()
@@ -86,6 +87,9 @@ public class GameController : MonoBehaviour
 	
 	public void OnApplicationQuit()
 	{
+		sc_AudioManager.Toggle_Music_Volume(true);
+		sc_AudioManager.Toggle_SFX_Volume(true);
+		
 		PlayerPrefs.Flush();
 	}
 	

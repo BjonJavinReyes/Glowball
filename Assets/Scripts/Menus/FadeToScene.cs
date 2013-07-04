@@ -16,10 +16,7 @@ public class FadeToScene : MonoBehaviour
 		// Create Black Fade texture (black texture that fills entire screen);
 		gameObject.guiTexture.pixelInset = new Rect(0,0, Screen.width, Screen.height);
 		
-		if (Application.loadedLevelName == "Menu")
-			gameObject.guiTexture.color = Color.clear;	// Set transparency to zero when start of application
-		if (Application.loadedLevelName == "Game")
-			gameObject.guiTexture.color = Color.black;	// Set transparency to one when start of application
+		gameObject.guiTexture.color = Color.black;	// Set transparency to one when start of application
 	}
 	
 	public void FadeToNewScene(string sceneName, float fadeOutTime)
@@ -27,20 +24,18 @@ public class FadeToScene : MonoBehaviour
 		StartCoroutine( FadeScene(sceneName, fadeOutTime) );		
 	}
 	
-	public void FadeInScene()
+	public void FadeInScene(float fadeInTime)
 	{
-		StartCoroutine( FadeIn() );
+		StartCoroutine( FadeIn(fadeInTime) );
 	}
 	
-	IEnumerator FadeIn()
+	IEnumerator FadeIn(float fadeInTime)
 	{
 		// Set object position to be above all gui
 		gameObject.transform.position = new Vector3(0,0,1);
 			
 		// Fade Black to Transparent
 		float time = 0;
-		float fadeInTime = 1.5f;
-		
 		while (time < 1)
 		{
 			// Calc time with delay

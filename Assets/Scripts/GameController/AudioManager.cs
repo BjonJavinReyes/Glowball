@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using PlayerPrefs = PreviewLabs.PlayerPrefs;
 
 public class AudioManager : MonoBehaviour 
 {
@@ -17,8 +18,8 @@ public class AudioManager : MonoBehaviour
 	[SerializeField] AudioClip Menu_Transition_Out;
 	#endregion
 	
-	public bool  SoundEffects_On;
-	public bool  Music_On;
+	public bool  isSFXOn;
+	public bool  isMusicOn;
 	
 	public float MasterVolume;
 	
@@ -40,6 +41,16 @@ public class AudioManager : MonoBehaviour
 	
 	void Start()
 	{
+		// Set Master Volume
+		MasterVolume = gameObject.audio.volume;
+		
+		// Set Audio Levels
+		isSFXOn   = PlayerPrefs.GetBool("audio_sfx", true);
+		isMusicOn = PlayerPrefs.GetBool("audio_music", true);
+		
+		Toggle_SFX_Volume(isSFXOn);
+		Toggle_Music_Volume(isMusicOn);
+		
 		// Set up sound dictionary
 		soundDictionary = new Dictionary<int, AudioClip>();
 		musicDictionary = new Dictionary<int, AudioClip>();
@@ -52,13 +63,6 @@ public class AudioManager : MonoBehaviour
 		soundDictionary.Add((int)SoundClips.MENU_SELECT, Menu_Select);
 		soundDictionary.Add((int)SoundClips.MENU_TRANSITION_IN, Menu_Transition_In);
 		soundDictionary.Add((int)SoundClips.MENU_TRANSITION_OUT, Menu_Transition_Out);
-		
-		// Set Audio settings to on for both soundeffects and music
-		SoundEffects_On = true;
-		Music_On = true;
-		
-		// Set Master Volume
-		MasterVolume = gameObject.audio.volume;
 	}
 	
 	void Update()
@@ -71,7 +75,7 @@ public class AudioManager : MonoBehaviour
 		//Debug.Log("Playing Audio Clip:  " + soundDictionary[key].ToString());
 		
 		// If sound effects is turned off, don't play anything
-		if (!SoundEffects_On) return;
+		if (!isSFXOn) return;
 		
 		// If dictionary contains sound clip play it
 		if( soundDictionary.ContainsKey(key) && soundDictionary[key])
@@ -83,11 +87,22 @@ public class AudioManager : MonoBehaviour
 	public void PlayMusic(int key)
 	{
 		// If music is turned off, don't play anything
-		if (!Music_On) return;
+		if (!isMusicOn) return;
 		
 		// If dictionary contains audio track play it
 		if( musicDictionary.ContainsKey(key) && musicDictionary[key])
 			audio.PlayOneShot(musicDictionary[key], 0.8f);
 		
+	}
+	
+	public void Toggle_SFX_Volume(bool toggleOn)
+	{
+		isSFXOn = toggleOn;
+		PlayerPrefs.SetBool("audio_sfx", toggleOn);
+	}
+	public void Toggle_Music_Volume(bool toggleOn)
+	{
+		isMusicOn = toggleOn;
+		PlayerPrefs.SetBool("audio_music", toggleOn);
 	}
 }

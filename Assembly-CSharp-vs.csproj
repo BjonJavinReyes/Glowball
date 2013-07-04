@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;UNITY_ANDROID_API;ENABLE_CLOTH;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;UNITY_4_1_2;UNITY_4_1;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;UNITY_ANDROID_API;ENABLE_CLOTH;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;UNITY_4_1_5;UNITY_4_1;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -60,6 +60,10 @@
      <Compile Include="Assets\Scripts\Menus\Buttons\Button.cs" />
      <Compile Include="Assets\Scripts\Menus\Buttons\ButtonManager.cs" />
      <Compile Include="Assets\Scripts\Menus\Buttons\ButtonTransition.cs" />
+     <Compile Include="Assets\Scripts\Menus\Buttons\Slider.cs" />
+     <Compile Include="Assets\Scripts\Menus\Buttons\ToggleButton.cs" />
+     <Compile Include="Assets\Scripts\Menus\Buttons\ToggleMusic.cs" />
+     <Compile Include="Assets\Scripts\Menus\Buttons\ToggleSFX.cs" />
      <Compile Include="Assets\Scripts\Menus\FadeToScene.cs" />
      <Compile Include="Assets\Scripts\Menus\GameplayTransition.cs" />
      <Compile Include="Assets\Scripts\Menus\MainMenuTransition.cs" />
@@ -67,6 +71,7 @@
      <Compile Include="Assets\Scripts\Menus\ScaleTexture.cs" />
      <Compile Include="Assets\Scripts\Score\HighScoreManager.cs" />
      <Compile Include="Assets\Scripts\Score\ScoreTracker.cs" />
+     <Compile Include="Assets\Scripts\SettingsController.cs" />
      <Compile Include="Assets\Scripts\VersionNumber.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

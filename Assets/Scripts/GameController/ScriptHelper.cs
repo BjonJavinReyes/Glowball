@@ -16,8 +16,12 @@ public class ScriptHelper : MonoBehaviour
 	[HideInInspector] public RowManager       sc_RowManager;
 	[HideInInspector] public ScoreTracker     sc_ScoreTracker;
 	
+	string LevelName;
+	
 	void Awake()
 	{
+		LevelName = Application.loadedLevelName;
+		
 		// Find scripts within scene
 		FindScripts();
 	}
@@ -35,6 +39,9 @@ public class ScriptHelper : MonoBehaviour
 		
 		// Find Scripts not attached to controller object
 		sc_AudioManager     = GameObject.Find("audio_manager").GetComponent<AudioManager>();
+		
+		if (LevelName == "Intro") return;
+		
 		sc_FadeToScene      = GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeToScene>();
 		sc_HighScoreManager = GameObject.FindGameObjectWithTag("Scores").GetComponent<HighScoreManager>();
 				
